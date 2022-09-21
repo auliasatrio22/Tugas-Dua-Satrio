@@ -1,0 +1,112 @@
+[
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":1,
+        "fields":{
+            "watched": true,
+            "title": "Titanic",
+            "rating": 5,
+            "release_date": "2022-12-12",
+            "review": "Sedih bangett!"
+        }
+},
+{
+        "model":"mywatchlist.mywatchlist",
+        "pk":2,
+        "fields":{
+            "watched": true,
+            "title": "Kungfu Panda",
+            "rating": 5,
+            "release_date": "2022-12-10",
+            "review": "Pandanya gemesh bangett!"
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":3,
+        "fields":{
+            "watched": true,
+            "title": "Mencuri Raden Saleh",
+            "rating": 5,
+            "release_date": "2022-11-12",
+            "review": "Film terbaik yang pernah aku tonton!"
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":4,
+        "fields":{
+            "watched": true,
+            "title": "Thor",
+            "rating": 3,
+            "release_date": "2022-10-12",
+            "review": "Gak sabar buat Thor 2"
+        }
+},
+{
+        "model":"mywatchlist.mywatchlist",
+        "pk":5,
+        "fields":{
+            "watched": true,
+            "title": "Warkop DKI Reborn",
+            "rating": 5,
+            "release_date": "2022-09-12",
+            "review": "Lucu Banget!"
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":6,
+        "fields":{
+            "watched": true,
+            "title": "Comic 8",
+            "rating": 2,
+            "release_date": "2022-01-12",
+            "review": "Lucu tapi seremm!"
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":7,
+        "fields":{
+            "watched": true,
+            "title": "James Bond",
+            "rating": 5,
+            "release_date": "2022-02-12",
+            "review": "Sangat Romantis"
+        }
+},
+{
+        "model":"mywatchlist.mywatchlist",
+        "pk":8,
+        "fields":{
+            "watched": true,
+            "title": "Home Alone",
+            "rating": 4,
+            "release_date": "2022-11-12",
+            "review": "Film Keluarga Banget"
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":9,
+        "fields":{
+            "watched": true,
+            "title": "Ada Apa Dengan Cinta",
+            "rating": 1,
+            "release_date": "2022-07-12",
+            "review": "Relate banget sama percintaan semasa SMA"
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":10,
+        "fields":{
+            "watched": true,
+            "title": "Iron Man",
+            "rating": 5,
+            "release_date": "2022-11-12",
+            "review": "Gak sabar nonton Iron Man 2!"
+        }
+    }
+]
