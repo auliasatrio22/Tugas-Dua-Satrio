@@ -51,9 +51,11 @@ def add_task(request):
     if request.method == "POST":
         title = request.POST.get('title')
         description = request.POST.get('description')
+        deadline = request.POST.get('deadline')
         newTask = Task(
             title = title,
             description = description,
+            deadline = deadline,
             user = request.user,
         )
         newTask.save()

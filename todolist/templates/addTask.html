@@ -1,35 +1,48 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block meta %}
-<title>New Task</title>
+<title>Add Task</title>
 {% endblock meta %}
 
 {% block content %}
-
-<div>
-
-    <h1>New Task</h1>
-
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>title: </td>
-                <td><input type="text" name="title" placeholder="Title" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td>description: </td>
-                <td><textarea name="description" placeholder="Description" class="form-control"></textarea></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn" type="submit"></td>
-            </tr>
-        </table>
-    </form>
-
+<link rel="stylesheet" href="{% static 'addTask.css' %}" />
+<br>
+<br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card-group mb-0">
+                <div class="card p-4">
+                    <div class="card-body">
+                        <div class="addTask-form">
+                            <h1 align="center">Add Task</h1>
+                            <br>
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                <table>
+                                    <tr>Mata Kuliah: </tr>
+                                    <tr><input type="text" name="title" placeholder="Mata Kuliah" class="form-control"></tr>
+                                    <br>
+                                
+                                    <tr>Deskripsi Tugas: </tr>
+                                    <tr><textarea name="description" placeholder="Deskripsi Tugas" class="form-control"></textarea></tr>
+                                    <br>
+                                
+                                    <tr>Deadline: </tr>
+                                    <tr><input type="datetime-local" name="deadline" placeholder="Deadline" class="form-control"></tr>
+                                    <br>
+                                    <tr>
+                                        <tr></tr>
+                                        <p align="center"><input class="btn btn-primary px-4" type="submit" value="Add Task"></p>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 {% endblock content %}

@@ -1,45 +1,59 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block meta %}
 <title>Login</title>
 {% endblock meta %}
 
 {% block content %}
-
-<div class = "login">
-
-    <h1>Login</h1>
-
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
-
-</div>
+<link rel="stylesheet" href="{% static 'login.css' %}" />
+<br>
+<br>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card-group mb-0">
+          <div class="card p-4">
+            <div class="card-body">
+              <h1>Login</h1>
+              <p class="text-muted">Sign In to your account</p>
+              <form method="POST" action="">
+                {% csrf_token %}
+                <div class="input-group mb-3">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <input type="text" name="username" placeholder="Username" class="form-control">
+                </div>
+                <div class="input-group mb-4">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <input type="password" name="password" placeholder="Password" class="form-control">
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                    <button type="submit" class="btn btn-primary px-4" value="Login">Login</button>
+                    </div>
+                </div>
+            </form>
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            </div>
+          </div>
+          <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+            <div class="card-body text-center">
+              <div>
+                <h2>Sign up</h2>
+                <p>Don't have an account?</p>
+                <a class="btn btn-primary active mt-3" href="{% url 'todolist:register' %}" role="button">Register Now!</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock content %}
