@@ -6,6 +6,12 @@ from todolist.models import Task
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+from django.core import serializers
+from django.http import JsonResponse
+from datetime import date
+from todolist.forms import TaskForm
 
 # Create your views here.
 @login_required(login_url='/todolist/login/')
@@ -49,15 +55,15 @@ def logout_user(request):
 
 def add_task(request):
     if request.method == "POST":
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-        deadline = request.POST.get('deadline')
-        newTask = Task(
-            title = title,
-            description = description,
-            deadline = deadline,
-            user = request.user,
-        )
-        newTask.save()
-        return redirect('todolist:show_todolist')
+        task = Task(user=request.user,  date=date.today())
+        form = TaskForm(request.POST or None, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect('todolist:show_todolist')
     return render(request, 'addTask.html')
+
+def get_json(request):
+    new_data = Task.objects.filter(user=request.user)
+    return HttpResponse(
+            serializers.serialize("json", new_data),
+            content_type="application/json")

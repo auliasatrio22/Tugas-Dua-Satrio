@@ -2,41 +2,136 @@
 {% load static %}
 
 {% block content %}
+
+{% csrf_token %}
+
 <link rel="stylesheet" href="{% static 'todolist.css' %}" />
 
 <h2 align="center">Hi, {{nama}}!</h2>
 <br>
-<p align="center"><a class="btn btn-primary px-4" href="{% url 'todolist:newtask' %}" role="button">Add Task</a></p>
 
-<div class="container">
-    <div class="row">
-        {% for list in list_todolist %}
-        <div class="col-lg-4">
-            <br>
-            <div class="card card-margin">
-                <div class="card-header no-border">
-                    <h5 class="card-title">TO DO</h5>
-                </div>
-                <div class="card-body pt-0">
-                    <div class="widget-49">
-                        <div class="widget-49-title-wrapper">
-                            <div class="widget-49-date-primary">{{forloop.counter}}</div>
-                            <div class="widget-49-meeting-info">
-                                <span class="widget-49-pro-title">{{list.title}}</span>
-                                <span class="widget-49-meeting-item">{{list.deadline}}</span>
-                            </div>
-                        </div>
-                        <ol class="widget-49-meeting-points">
-                            <li class="widget-49-meeting-item"><span>{{list.description}}</span></li>
-                        </ol>
-                    </div>
+{% comment %}
+<p align="center"><a class="btn btn-primary px-4" href="{% url 'todolist:newtask' %}" role="button">Add Task</a></p>
+{% endcomment %}
+
+</li >
+<div class="div d-flex justify-content-center mt-3">
+<button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Create Task
+  </button>
+</div>
+</li>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+        </div>
+        <div class="modal-body">
+            <div>
+        
+                <a class="text-decoration-none text-dark">Mata Kuliah</a>
+                <input type="text" id="todo" name="todo" placeholder="Title" class="form-control">
+                    
+                <a class="text-decoration-none text-dark">Deskripsi Tugas: </a>
+                <textarea name="description" placeholder="Deskripsi Tugas" class="form-control"></textarea>
+
+                <div class="div d-flex justify-content-center mt-3">
+                    <button class="btn btn-success" type="submit" onclick="ubah()">Add</button>
                 </div>
             </div>
         </div>
-        {% endfor %}
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<br>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div id="card">
+    </div>
     </div>
 </div>
 
 <p align="center"><a class="btn btn-danger px-4" href="{% url 'todolist:logout' %}" role="button">Logout</a></p>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+
+    function ubah(){
+        $.ajax({
+        url: "/todolist/create-task/",
+        type: "POST",
+        headers: {
+            "X-CSRFToken": getCookie("csrftoken")
+          },
+        data: {
+            title: $("#title").val(),
+            description: $("#description").val()
+        },
+        success: () => {
+            alert("Done!")
+            tampilkan()
+        },
+        error: function(){
+          alert("error");
+        },
+    })}
+
+    function tampilkan() {
+      $.get("/todolist/json", function(data) {
+        $("#card").html("")
+            for(let i = 0; i < data.length ; i++){
+                    $("#card").append(`<div class="card card-margin">
+                    <div class="card-header no-border">
+                    <h5 class="card-title">TO DO</h5>
+                    <div class="card-body pt-0">
+                        <div class="widget-49">
+                            <div class="widget-49-title-wrapper">
+                                <div class="widget-49-date-primary">${i+1}</div>
+                                <div class="widget-49-meeting-info">
+                                    <span class="widget-49-pro-title">${data[i].fields.title}</span>
+                                </div>
+                            </div>
+                            <ol class="widget-49-meeting-points">
+                                <li class="widget-49-meeting-item"><span>${data[i].fields.description}</span></li>
+                            </ol>
+                        </div>
+                    </div>`
+                    )
+                } 
+            });
+    }
+
+    $(document).ready(function(){
+          tampilkan();
+    });
+
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+
+</script>
+
 
 {% endblock content %}
